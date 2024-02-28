@@ -48,6 +48,8 @@
 7. Access the operating system inside a container:
    ```
    docker exec -it CONTAINER_NAME (or CONTAINER_ID) bash (or sh) # sh or bash option depends on wich shell the OS exist inside the container 
+   ex: docker run -d --name my-ubuntu-container ubuntu sleep infinity
+
 
 8. Execute Linux commands inside the container:
    ``` 
