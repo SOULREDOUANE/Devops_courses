@@ -174,7 +174,11 @@ This document provides instructions for managing Kubernetes configuration using 
     ```bash
     kubectl get pods -oyaml | grep image 
     ```
-
+16. Get metrics of node
+    ```bash 
+    kubectl top node my-node 
+    # Show metrics for a given node
+    ```
 
  ## All node's  imperative commands 
 
@@ -218,4 +222,82 @@ This document provides instructions for managing Kubernetes configuration using 
     ```bash 
     kubectl uncordon node01
     ```
+11. Delete node `node01`
+    ```bash
+    kubectl delete node01
+    ```
+12. Get metrics of node
+    ```bash 
+    kubectl top node my-node 
+    # Show metrics for a given node
+    ```
+## All Deployment Imperative commands 
+
+1. Create a deployment 
+    ```bash
+    kubectl create deployment  nginx-deployment --image=nginx
+    ```
+2. Scale a Deployment: Scale the number of replicas of  `nginx-deployment`
+    ```bash 
+    kubectl scale deployment nginx-deployment --replicas=3
+    ```
+3. Rolling Update: Update the image of the `nginx-deployment` in a rolling manner to avoid downtime.
+    ```
+    kubectl set image deployment/nginx-deployment <container-name>=<new-image>
+14. Check the history of updates for `nginx-deployment`
+    ```bash 
+    kubectl rollout history deployment nginx-deployment 
+15. Roll back to pervious deployment's version 
+    ```bash
+    kubectl rollout undo deployment nginx-deployment --to-revision=3
+    # or to the last version by 
+    kubectl rollout undo deployment nginx-deployemt 
+16. Describe Deployment: Describe a deployment in detail, including events and annotations.
+    ```bash 
+    kubectl describe deployment nginx-deployment
+    ```
+17. Create a deployment from yml file 
+    ```bash
+    kubectl create -f nginx-deployment.yml --record
+    ```
+18. Edit a deployment 
+    ```bash
+    kubectl edit deployemnt nginx-deployemnt
+    ```
+17. Delete a deployment
+    ```bash
+    kubectl delete deploymetn nginx-deployment 
+
+## All service imperative commands
+
+1. Create a Service: Use `kubectl create service` and ` --tcp=<port>:<targetPort>` to create a new service.
+    ```bash
+    kubectl create service nginx-service  --tcp=80:80
+    # you can use other Protocols instead of tcp like UDP
+    ```
+2. Expose a Deployment: Expose a deployment as a service.
+    ```bash
+    kubectl expose deployment <deployment-name> --port=<port> --target-port=<target-port> --type=<service-type>
+    # there are three service types ClusterIp, NodePort and LoadBalancer
+4. Edit a Service: Edit the definition of a service.
+    ```bash 
+    kubectl edit svc nginx-service 
+    ```
+5. Describe a Service: Get detailed information about a service, including its endpoints.
+    ```bash 
+    kubeclt  descirbe svc nginx-service
+    ```
+6. Label a Service: Add labels to a service.
+    ```bash
+    kubectl label svc nginx-service app:frent
+7. Label a Service: Add labels to a service.
+    ```bash 
+    kubectl annotate service nginx-service  <annotation-key>=<annotation-value>
+    ```
+8. 
+
+## All secret imperative commands 
+
+1. 
+
 
